@@ -6,6 +6,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import '../global.css';
 
 SplashScreen.preventAutoHideAsync();
 

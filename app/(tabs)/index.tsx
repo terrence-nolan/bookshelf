@@ -13,9 +13,9 @@ export default function Index() {
       }}
     >
       <View style={{ height: top }}>
-        <Text>My Shelf</Text>
+        <Text>Home</Text>
       </View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Edit app/(tabs)/index.tsx to edit this screen.</Text>
     </View>
   );
 }

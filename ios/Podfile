@@ -28,7 +28,7 @@ self.define_singleton_method(use_autolinking_method_symbol) do |*args|
   end
 end
 
-platform :ios, podfile_properties['ios.deploymentTarget'] || '13.4'
+platform :ios, '17.0'
 install! 'cocoapods',
   :deterministic_uuids => false
 
@@ -38,8 +38,9 @@ target 'bookshelf' do
   use_expo_modules!
   config = use_native_modules!
 
-  use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
-  use_frameworks! :linkage => ENV['USE_FRAMEWORKS'].to_sym if ENV['USE_FRAMEWORKS']
+  use_frameworks! :linkage => :static
+
+  Pod::UI.puts "Using iOS Deployment Target: #{podfile_properties['ios.deploymentTarget'] || '17.0'}"
 
   use_react_native!(
     :path => config[:reactNativePath],

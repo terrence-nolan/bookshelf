@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextInput, TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { FunnelSimple, MagnifyingGlass, Plus, X } from "phosphor-react-native";
+import ContextMenu from "react-native-context-menu-view";
 
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -38,7 +39,11 @@ export default function BookshelfHeader() {
       >
         <MagnifyingGlass size={28} color={Colors[colorScheme ?? 'light'].text} />
       </TouchableOpacity>
-      <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} />
+      <ContextMenu
+        actions={[{ title: 'Finished' }, { title: 'Unfinished' }]}
+      >
+        <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} />
+      </ContextMenu>
       <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
     </View>
     <View style={styles.headerContainer}>

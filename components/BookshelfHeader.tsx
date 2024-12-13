@@ -1,18 +1,25 @@
 import React, { useState } from "react";
-import { TextInput, TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TextInput, TouchableOpacity, View, Text, StyleSheet, Modal } from "react-native";
 import { FunnelSimple, MagnifyingGlass, Plus, X } from "phosphor-react-native";
 
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { AddBookModal } from "./AddBookModal";
 
 export default function BookshelfHeader() {
-  const [search, setSearch] = useState<boolean>(false);
+  // const [search, setSearch] = useState<boolean>(false);
+  const [addModal, setAddModal] = useState<boolean>(false);
   const colorScheme = useColorScheme();
+
+  const toggleAddModal = () => {
+    setAddModal(!addModal)
+    console.log('toggling modal');
+  }
 
   return (
     <>
     <View style={styles.buttonContainer}>
-      {search && (
+      {/* {search && (
         <>
           <TouchableOpacity
             onPress={() => setSearch(false)}
@@ -38,8 +45,13 @@ export default function BookshelfHeader() {
       >
         <MagnifyingGlass size={28} color={Colors[colorScheme ?? 'light'].text} />
       </TouchableOpacity>
-      <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} />
-      <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
+      <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} /> */}
+      <TouchableOpacity
+        onPress={() => setAddModal(true)}
+      >
+        <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
+      </TouchableOpacity>
+      <AddBookModal isVisible={addModal} setIsVisible={toggleAddModal} />
     </View>
     <View style={styles.headerContainer}>
       <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Bookshelf</Text>

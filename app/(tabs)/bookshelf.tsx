@@ -3,15 +3,19 @@ import { SafeAreaView, View } from "react-native";
 
 import { Book } from "@/components/Book";
 import BookshelfHeader from "@/components/BookshelfHeader";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function Index() {
+  const colorScheme = useColorScheme();
 
   return (
     <>
-      <SafeAreaView />
+      <SafeAreaView style={{ backgroundColor: Colors[colorScheme ?? 'light'].background }} />
       <View
         style={{
           flex: 1,
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
         }}
       >
         <BookshelfHeader />

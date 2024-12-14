@@ -13,7 +13,6 @@ export default function BookshelfHeader() {
 
   const toggleAddModal = () => {
     setAddModal(!addModal)
-    console.log('toggling modal');
   }
 
   return (

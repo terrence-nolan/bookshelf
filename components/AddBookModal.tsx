@@ -1,8 +1,25 @@
 import React from 'react';
-import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import { BlurView } from 'expo-blur';
+import { BookOpen, FloppyDisk, UploadSimple } from 'phosphor-react-native';
 
 // import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { CustomTextInput } from './CustomTextInput';
+import HeaderIconButton from './UploadImageButton';
+import UploadImageButton from './UploadImageButton';
+import IconButton from './IconButton';
 
 interface AddBookModalProps {
   isVisible: boolean;
@@ -11,32 +28,51 @@ interface AddBookModalProps {
 
 export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
   const colorScheme = useColorScheme();
-  const backgroundColorStyle = {
-    backgroundColor: colorScheme === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-  };
-  
+  const blurTint = colorScheme === 'dark' ? 'systemThickMaterialDark' : 'systemThickMaterialLight';
 
   return (
     <Modal
       visible={isVisible}
       animationType="slide"
-      presentationStyle="pageSheet"
+      transparent={true}
       onRequestClose={() => setIsVisible()}
     >
-      <View className="flex-1 p-5" style={backgroundColorStyle}>
-        <View className="flex-row justify-between pb-5">
-          <TouchableOpacity onPress={() => setIsVisible()}>
-            <Text className="text-xl">Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsVisible()}>
-            <Text className="text-xl font-bold">Save</Text>
-          </TouchableOpacity>
-        </View>
-        <Text className="text-4xl font-bold mb-3">Add a Book</Text>
-        <TextInput className="text-2xl bg-stone-200 rounded-lg p-3 my-3" placeholder="Title" />
-        <TextInput className="text-2xl bg-stone-200 rounded-lg p-3 my-3" placeholder="Author" />
-      
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className='flex-1'
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <BlurView className='flex-1' tint={blurTint} intensity={70}>
+            <SafeAreaView />
+            <ScrollView
+              className="flex-1 p-5 pb-10"
+              keyboardDismissMode='on-drag'
+              keyboardShouldPersistTaps='handled'  
+            >
+              <View className="flex-row justify-between -mx-5 pb-2 mb-5 border-b">
+                <TouchableOpacity onPress={() => setIsVisible()}>
+                  <Text className="text-xl pl-5">Cancel</Text>
+                </TouchableOpacity>
+                {/* <TouchableOpacity onPress={() => setIsVisible()}>
+                  <Text className="text-xl font-bold">Save</Text>
+                </TouchableOpacity> */}
+              </View>
+              <Text className="text-4xl font-bold mb-7">Add a Book</Text>
+              <UploadImageButton />
+              <CustomTextInput title='Title' customKeyboardType='default' />
+              <CustomTextInput title='Author' customKeyboardType='default' />
+              <CustomTextInput title='Publisher' customKeyboardType='default' />
+              <CustomTextInput title='Year' customKeyboardType='number-pad' />
+              <CustomTextInput title='Edition' customKeyboardType='default' />
+              <CustomTextInput title='ISBN' customKeyboardType='number-pad' />
+              <View className='flex-row gap-3 mt-4 mb-10'>
+                <IconButton icon={<FloppyDisk />} title='Save' />
+                <IconButton icon={<BookOpen />} title='Save and Open' buttonStyles='bg-stone-300' />
+              </View>
+            </ScrollView>
+          </BlurView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, Modal } from "react-native";
-import { FunnelSimple, MagnifyingGlass, Plus, X } from "phosphor-react-native";
+import { FunnelSimple, MagnifyingGlass, Plus, Timer, X } from "phosphor-react-native";
 
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -45,15 +45,18 @@ export default function BookshelfHeader() {
         <MagnifyingGlass size={28} color={Colors[colorScheme ?? 'light'].text} />
       </TouchableOpacity>
       <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} /> */}
+      <TouchableOpacity>
+        <Timer size={28} color={Colors[colorScheme ?? 'light'].text} weight="bold" />
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setAddModal(true)}
       >
-        <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
+        <Plus size={28} color={Colors[colorScheme ?? 'light'].text}  weight="bold"/>
       </TouchableOpacity>
       <AddBookModal isVisible={addModal} setIsVisible={toggleAddModal} />
     </View>
     <View style={styles.headerContainer}>
-      <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Bookshelf</Text>
+      <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Books</Text>
     </View>
     </>
   )

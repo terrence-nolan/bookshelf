@@ -30,7 +30,7 @@ export default function UploadImageButton() {
           onPress={pickImage}
         >
           {image ? <Swap size={18} weight='bold' /> : <UploadSimple size={18} weight='bold' />}
-          <Text className='text-lg'>{image ? 'Change' : 'Upload'}</Text>
+          <Text className='text-lg font-semibold'>{image ? 'Change' : 'Upload'}</Text>
         </TouchableOpacity>
     </>
   );

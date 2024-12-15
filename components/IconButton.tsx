@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Text, Image } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-
+import React from 'react';
+import { TouchableOpacity, Text } from 'react-native';
 interface IconButtonProps {
   icon: React.JSX.Element;
   title: string;
-  buttonStyles?: string;
+  buttonColor?: string;
   textStyles?: string;
 }
 
-export default function IconButton({ icon, title, buttonStyles, textStyles }: IconButtonProps) {
+export default function IconButton({ icon, title, buttonColor, textStyles }: IconButtonProps) {
   return (
     <>
       <TouchableOpacity
-        className={`flex-row flex-1 items-center justify-center gap-2 bg-stone-50 border border-stone-300 rounded-xl p-3 mt-1 mb-5 ${buttonStyles}`}
+        className={`flex-row flex-1 items-center justify-center gap-2 border border-stone-300 rounded-xl p-3 mt-1 mb-5 ${buttonColor}`}
       >
         {React.cloneElement(icon, { size: 18, weight: 'bold' })}
-        <Text className={`text-lg ${textStyles}`}>{title}</Text>
+        <Text className={`text-lg font-semibold ${textStyles}`}>{title}</Text>
       </TouchableOpacity>
     </>
   );

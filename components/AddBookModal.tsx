@@ -12,12 +12,11 @@ import {
   View,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
-import { BookOpen, FloppyDisk, UploadSimple } from 'phosphor-react-native';
+import { BookOpen, FloppyDisk } from 'phosphor-react-native';
 
 // import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { CustomTextInput } from './CustomTextInput';
-import HeaderIconButton from './UploadImageButton';
 import UploadImageButton from './UploadImageButton';
 import IconButton from './IconButton';
 
@@ -44,19 +43,19 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <BlurView className='flex-1' tint={blurTint} intensity={70}>
             <SafeAreaView />
+            <View className="flex-row justify-between pb-2 border-b">
+              <TouchableOpacity onPress={() => setIsVisible()}>
+                <Text className="text-xl pl-5">Cancel</Text>
+              </TouchableOpacity>
+              {/* <TouchableOpacity onPress={() => setIsVisible()}>
+                <Text className="text-xl font-bold">Save</Text>
+              </TouchableOpacity> */}
+            </View>
             <ScrollView
               className="flex-1 p-5 pb-10"
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps='handled'  
             >
-              <View className="flex-row justify-between -mx-5 pb-2 mb-5 border-b">
-                <TouchableOpacity onPress={() => setIsVisible()}>
-                  <Text className="text-xl pl-5">Cancel</Text>
-                </TouchableOpacity>
-                {/* <TouchableOpacity onPress={() => setIsVisible()}>
-                  <Text className="text-xl font-bold">Save</Text>
-                </TouchableOpacity> */}
-              </View>
               <Text className="text-4xl font-bold mb-7">Add a Book</Text>
               <UploadImageButton />
               <CustomTextInput title='Title' customKeyboardType='default' />
@@ -66,8 +65,8 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
               <CustomTextInput title='Edition' customKeyboardType='default' />
               <CustomTextInput title='ISBN' customKeyboardType='number-pad' />
               <View className='flex-row gap-3 mt-4 mb-10'>
-                <IconButton icon={<FloppyDisk />} title='Save' />
-                <IconButton icon={<BookOpen />} title='Save and Open' buttonStyles='bg-stone-300' />
+                <IconButton icon={<FloppyDisk />} title='Save' buttonColor='bg-stone-50' />
+                <IconButton icon={<BookOpen />} title='Save and Open' buttonColor='bg-stone-300' />
               </View>
             </ScrollView>
           </BlurView>

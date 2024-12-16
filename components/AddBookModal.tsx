@@ -34,7 +34,6 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
       visible={isVisible}
       animationType="slide"
       transparent={true}
-      onRequestClose={() => setIsVisible()}
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -47,16 +46,13 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
               <TouchableOpacity onPress={() => setIsVisible()}>
                 <Text className="text-xl pl-5">Cancel</Text>
               </TouchableOpacity>
-              {/* <TouchableOpacity onPress={() => setIsVisible()}>
-                <Text className="text-xl font-bold">Save</Text>
-              </TouchableOpacity> */}
             </View>
             <ScrollView
               className="flex-1 p-5 pb-10"
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps='handled'  
             >
-              <Text className="text-4xl font-bold mb-7">Add a Book</Text>
+              <Text className="text-3xl font-bold mb-7">Add a Book</Text>
               <UploadImageButton />
               <CustomTextInput title='Title' customKeyboardType='default' />
               <CustomTextInput title='Author' customKeyboardType='default' />

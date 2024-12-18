@@ -5,55 +5,38 @@ import { FunnelSimple, MagnifyingGlass, Plus, Timer, X } from "phosphor-react-na
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AddBookModal } from "./AddBookModal";
+import { TimerModal } from "./TimerModal";
 
 export default function BookshelfHeader() {
   // const [search, setSearch] = useState<boolean>(false);
-  const [addModal, setAddModal] = useState<boolean>(false);
   const colorScheme = useColorScheme();
+  const [addBookModal, setAddBookModal] = useState<boolean>(false);
+  const [timerModal, setTimerModal] = useState<boolean>(false);
 
-  const toggleAddModal = () => {
-    setAddModal(!addModal)
+
+  const toggleAddBookModal = () => {
+    setAddBookModal(!addBookModal)
+  }
+
+  const toggleTimerModal = () => {
+    setTimerModal(!timerModal)
   }
 
   return (
     <>
     <View style={styles.buttonContainer}>
-      {/* {search && (
-        <>
-          <TouchableOpacity
-            onPress={() => setSearch(false)}
-          >
-            <X size={28} color={Colors[colorScheme ?? 'light'].text} />
-          </TouchableOpacity>
-          <TextInput
-            placeholder="Search"
-            style={{
-              flex: 1,
-              height: 28,
-              borderWidth: 1.5,
-              padding: 4,
-              borderRadius: 4,
-              borderColor: Colors[colorScheme ?? 'light'].text,
-              color: Colors[colorScheme ?? 'light'].text,
-            }}
-          />
-        </>
-      )}
       <TouchableOpacity
-        onPress={() => setSearch(true)}
+        onPress={() => setTimerModal(true)}
       >
-        <MagnifyingGlass size={28} color={Colors[colorScheme ?? 'light'].text} />
-      </TouchableOpacity>
-      <FunnelSimple size={28} color={Colors[colorScheme ?? 'light'].text} /> */}
-      <TouchableOpacity>
-        <Timer size={28} color={Colors[colorScheme ?? 'light'].text} weight="bold" />
+        <Timer size={28} color={Colors[colorScheme ?? 'light'].text} />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => setAddModal(true)}
+        onPress={() => setAddBookModal(true)}
       >
-        <Plus size={28} color={Colors[colorScheme ?? 'light'].text}  weight="bold"/>
+        <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
       </TouchableOpacity>
-      <AddBookModal isVisible={addModal} setIsVisible={toggleAddModal} />
+      <TimerModal isVisible={timerModal} setIsVisible={toggleTimerModal} />
+      <AddBookModal isVisible={addBookModal} setIsVisible={toggleAddBookModal} />
     </View>
     <View style={styles.headerContainer}>
       <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Books</Text>
@@ -81,7 +64,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   header: {
-    fontSize: 36,
+    fontSize: 24,
     fontWeight: '700',
   }
 })

@@ -23,14 +23,14 @@ export default function UploadImageButton() {
 
   return (
     <>
-      <Text className='text-2xl'>Cover Image</Text>
+      <Text className='text-xl font-medium'>Cover Image</Text>
         {image && <Image source={{ uri: image }} className='h-60 w-40 rounded my-1' />}
         <TouchableOpacity
           className='flex-row items-center justify-center gap-2 bg-stone-50 border border-stone-300 rounded-xl p-3 mt-1 mb-5'
           onPress={pickImage}
         >
           {image ? <Swap size={18} weight='bold' /> : <UploadSimple size={18} weight='bold' />}
-          <Text className='text-lg font-semibold'>{image ? 'Change' : 'Upload'}</Text>
+          <Text className='text-lg font-medium'>{image ? 'Change' : 'Upload'}</Text>
         </TouchableOpacity>
     </>
   );

@@ -19,6 +19,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { CustomTextInput } from './CustomTextInput';
 import UploadImageButton from './UploadImageButton';
 import IconButton from './IconButton';
+import { ModalHeader } from './ModalHeader';
 
 interface AddBookModalProps {
   isVisible: boolean;
@@ -40,13 +41,9 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
         className='flex-1'
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <BlurView className='flex-1' tint={blurTint} intensity={70}>
+          <BlurView className='flex-1' tint={blurTint} intensity={75}>
             <SafeAreaView />
-            <View className="flex-row justify-between pb-2 border-b">
-              <TouchableOpacity onPress={() => setIsVisible()}>
-                <Text className="text-xl pl-5">Cancel</Text>
-              </TouchableOpacity>
-            </View>
+            <ModalHeader setIsVisible={setIsVisible} headerText='Cancel' />
             <ScrollView
               className="flex-1 p-5 pb-10"
               keyboardDismissMode='on-drag'

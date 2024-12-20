@@ -42,7 +42,7 @@ export function ProgressBar() {
   });
   
   return (
-    <View className="flex flex-col p-5 mx-4 my-6 shadow-xl border border-stone-300 rounded-xl bg-stone-100">
+    <View className="flex flex-col p-5 mx-4 my-2 shadow-xl border border-stone-300 rounded-xl bg-stone-100">
       {totalLoggedSeconds >= (dailyGoal * 60) ? (
         <View className='flex-row items-center gap-2 self-center'>
           <CheckCircle size={16} color={'#15803d'} weight='fill' />
@@ -60,6 +60,14 @@ export function ProgressBar() {
           <Text className='text-sm text-stone-500'>{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
         </View>
       )}
+      <View className='items-center mt-6'>
+        <TouchableOpacity
+          className='bg-stone-950 py-4 px-6 rounded-full'
+          // onPress={openBottomSheet}
+        >
+          <Text className='text-stone-50 font-medium text-lg'>Continue Reading</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

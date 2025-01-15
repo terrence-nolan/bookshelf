@@ -7,13 +7,19 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
-   npm install
+   yarn install
    ```
 
-2. Start the app
+2. Update dependencies
 
    ```bash
-    npx expo start
+   yarn upgrade
+   ```
+
+3. Start the app
+
+   ```bash
+    yarn start
    ```
 
 In the output, you'll find options to open the app in a
@@ -30,7 +36,7 @@ You can start developing by editing the files inside the **app** directory. This
 When you're ready, run:
 
 ```bash
-npm run reset-project
+yarn run reset-project
 ```
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.

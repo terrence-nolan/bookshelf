@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Check, CheckCircle } from "phosphor-react-native";
+import { Check } from "phosphor-react-native";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 export function RecentActivity() {
   const past7Days = [
@@ -14,17 +15,12 @@ export function RecentActivity() {
   ];
 
   const calculateColor = (percentage: number) => {
-    if (percentage === 0) return "#d1d5db"; // gray 300 for no progress
-    if (percentage >= 1) return "#15803d"; // green 700 for completed
-
-    const thresholds = [0, 0.2, 0.4, 0.6, 0.8, 1];
+    const thresholds = [0, 0.33, 0.66, 1];
     const colors = [
-      "#ef4444", // red 500
-      "#f97316", // orange 500
-      "#f59e0b", // amber 500
-      "#eab308", // yellow 500
-      "#22c55e", // green 500
-      "#15803d", // green 700
+      "#ef4444", // red
+      "#f97316", // orange
+      "#eab308", // yellow
+      "#22c55e", // green
     ];
 
     for (let i = thresholds.length - 1; i >= 0; i--) {
@@ -33,7 +29,7 @@ export function RecentActivity() {
       }
     }
 
-    return "#d1d5db"; // fallback gray 300
+    return "#D1D5DB"; // fallback gray
   };
 
   return (
@@ -43,27 +39,39 @@ export function RecentActivity() {
         {past7Days.map((day, index) => (
           <View key={index} className="items-center">
             {day.percentage === 1 ? (
-              // <CheckCircle size={40} color="#15803d" weight="fill" />
-              <View
-                className={'rounded-full border-2 border-transparent flex justify-center items-center'}
-                style={{
-                  backgroundColor: calculateColor(day.percentage),
-                  width: 32,
-                  height: 32,
-                }}
-              >
-                <Check size={20} weight="bold" color="white" />
-              </View>
+              // <View
+              //   className="rounded-full flex justify-center items-center"
+              //   style={{
+              //     backgroundColor: calculateColor(day.percentage),
+              //     width: 32,
+              //     height: 32,
+              //   }}
+              // >
+              //   <Check size={20} weight="bold" color="white" />
+              // </View>
+            <AnimatedCircularProgress
+              size={32}
+              width={4}
+              fill={day.percentage * 100}
+              tintColor={calculateColor(day.percentage)}
+              backgroundColor="#D1D5DB"
+              rotation={0}
+            >
+              {
+                () => (
+                  <Check size={18} weight="bold" color="#22c55e" />
+                )
+              }
+            </AnimatedCircularProgress>
             ) : (
-              <View
-                className={`rounded-full border-2 flex justify-center items-center ${
-                  day.percentage === 0 ? "border-gray-300" : "border-transparent"
-                }`}
-                style={{
-                  backgroundColor: day.percentage > 0 ? calculateColor(day.percentage) : "transparent",
-                  width: 32,
-                  height: 32,
-                }}
+              <AnimatedCircularProgress
+                size={32}
+                width={4}
+                fill={day.percentage * 100}
+                tintColor={calculateColor(day.percentage)}
+                backgroundColor="#D1D5DB"
+                rotation={0}
+                lineCap="round"
               />
             )}
             <Text className="text-sm text-stone-500 mt-1">{day.day}</Text>

@@ -3,16 +3,10 @@ import { View, Text } from "react-native";
 import { Check } from "phosphor-react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
+import { recentDaysReading } from './__mocks__/recentDaysReading';
+
 export function RecentActivity() {
-  const past7Days = [
-    { day: "Mon", percentage: 0.0 },
-    { day: "Tue", percentage: 0.3 },
-    { day: "Wed", percentage: 0.6 },
-    { day: "Thu", percentage: 0.8 },
-    { day: "Fri", percentage: 1.0 },
-    { day: "Sat", percentage: 0.0 },
-    { day: "Sun", percentage: 0.5 },
-  ];
+  const past7Days = recentDaysReading;
 
   const calculateColor = (percentage: number) => {
     const thresholds = [0, 0.33, 0.66, 1];
@@ -54,7 +48,7 @@ export function RecentActivity() {
               width={4}
               fill={day.percentage * 100}
               tintColor={calculateColor(day.percentage)}
-              backgroundColor="#D1D5DB"
+              backgroundColor="#d6d3d1"
               rotation={0}
             >
               {
@@ -69,7 +63,7 @@ export function RecentActivity() {
                 width={4}
                 fill={day.percentage * 100}
                 tintColor={calculateColor(day.percentage)}
-                backgroundColor="#D1D5DB"
+                backgroundColor="#d6d3d1"
                 rotation={0}
                 lineCap="round"
               />

@@ -3,11 +3,9 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { CheckCircle } from "phosphor-react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
-export function ProgressBar() {
-  const totalLoggedSeconds = 1000;
-  const dailyGoal = 5;
-  const totalLoggedMinutes = 7;
+import { totalLoggedSeconds, dailyGoal, totalLoggedMinutes } from "./__mocks__/currentDaysReading";
 
+export function ProgressBar() {
   const animatedProgress = useSharedValue(0);
   const animatedThreshold = useSharedValue(0);
 
@@ -32,7 +30,7 @@ export function ProgressBar() {
 
   const animatedWidth = useAnimatedStyle(() => {
     return {
-      width: `${animatedProgress.value > 0 ? Math.max(animatedProgress.value, 8) : 0}%`,
+      width: `${animatedProgress.value > 0 ? Math.max(animatedProgress.value, 4) : 0}%`,
     };
   });
 
@@ -58,18 +56,15 @@ export function ProgressBar() {
           <Text className="text-lg font-medium text-stone-950">Today's reading</Text>
           <Text className="text-lg font-medium text-stone-950">{((totalLoggedMinutes / dailyGoal) * 100).toFixed(0)}%</Text>
         </View>
-        <View className="bg-stone-300 h-4 w-full rounded-full">
-          <Animated.View style={[animatedWidth, animatedBackgroundColor]} className="h-4 rounded-full" />
+        <View className="bg-stone-300 h-1.5 w-full rounded-full">
+          <Animated.View style={[animatedWidth, animatedBackgroundColor]} className="h-1.5 rounded-full" />
         </View>
-        <View className="flex-col">
-          <Text className="text-base text-stone-500">{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
-          {totalLoggedSeconds >= dailyGoal * 60 && (
-            <View className="flex-row items-center gap-2">
-              <CheckCircle size={16} weight="fill" color="#22c55e" />
-              <Text className="text-base text-stone-500">Daily goal complete!</Text>
-            </View>
-          )}
-        </View>
+        {totalLoggedSeconds >= dailyGoal * 60 && (
+          <View className="flex-row items-center gap-1 justify-start">
+            <CheckCircle size={16} weight="fill" color="#22c55e" />
+            <Text className="text-base text-stone-500">{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
+          </View>
+        )}
       </View>
       <View className="items-center mt-6">
         <TouchableOpacity className="bg-stone-950 py-4 px-6 rounded-full">

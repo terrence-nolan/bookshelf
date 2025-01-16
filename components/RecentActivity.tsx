@@ -27,7 +27,7 @@ export function RecentActivity() {
   };
 
   return (
-    <View className="flex flex-col p-5 mx-4 my-6 shadow-xl rounded-xl bg-stone-100">
+    <>
       <Text className="text-lg font-medium text-stone-950 mb-4">Your recent activity</Text>
       <View className="flex flex-row justify-between items-center">
         {past7Days.map((day, index) => (
@@ -58,6 +58,6 @@ export function RecentActivity() {
           </View>
         ))}
       </View>
-    </View>
+    </>
   );
 }

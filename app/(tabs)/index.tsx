@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Timer } from "@/components/Timer";
 import { ProgressBar } from "@/components/ProgressBar";
 import { RecentActivity } from "@/components/RecentActivity";
+import { ShadowCard } from "@/components/ShadowCard";
 
 export default function Index() {
   const { top } = useSafeAreaInsets();
@@ -20,8 +21,8 @@ export default function Index() {
       </View>
       <ScrollView className="h-full flex-col">
         <Text className="text-3xl text-stone-950 font-semibold px-4 py-2">Welcome Back, {name}!</Text>
-        <ProgressBar />
-        <RecentActivity />
+        <ShadowCard childComponent={<ProgressBar />} />
+        <ShadowCard childComponent={<RecentActivity />} />
       </ScrollView>
     </View>
   );

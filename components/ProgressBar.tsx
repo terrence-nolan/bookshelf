@@ -50,7 +50,7 @@ export function ProgressBar() {
   });
 
   return (
-    <View className="flex flex-col p-5 mx-4 my-2 shadow-xl rounded-xl bg-stone-100">
+    <>
       <View className="flex flex-col gap-2 items-start">
         <View className="flex w-full flex-row justify-between items-center">
           <Text className="text-lg font-medium text-stone-950">Today's reading</Text>
@@ -71,6 +71,6 @@ export function ProgressBar() {
           <Text className="text-stone-50 font-medium text-lg">Continue Reading</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 }

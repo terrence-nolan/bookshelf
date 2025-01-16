@@ -2,7 +2,6 @@ import React from "react";
 import { UserCircle } from "phosphor-react-native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Timer } from "@/components/Timer";
 import { ProgressBar } from "@/components/ProgressBar";
 import { RecentActivity } from "@/components/RecentActivity";
 import { ShadowCard } from "@/components/ShadowCard";

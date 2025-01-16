@@ -44,13 +44,13 @@ export function ProgressBar() {
     ];
 
     const index = thresholds.findIndex((threshold) => animatedThreshold.value === threshold);
-    const color = index !== -1 ? colors[index] : "#D1D5DB"; // fallback gray
+    const color = index !== -1 ? colors[index] : "#d6d3d1"; // fallback gray
 
     return { backgroundColor: color };
   });
 
   return (
-    <View className="flex flex-col p-5 mx-4 my-2 shadow-xl border border-stone-300 rounded-xl bg-stone-100">
+    <View className="flex flex-col p-5 mx-4 my-2 shadow-xl rounded-xl bg-stone-100">
       <View className="flex flex-col gap-2 items-start">
         <View className="flex w-full flex-row justify-between items-center">
           <Text className="text-lg font-medium text-stone-950">Today's reading</Text>

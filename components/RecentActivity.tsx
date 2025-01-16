@@ -23,40 +23,26 @@ export function RecentActivity() {
       }
     }
 
-    return "#D1D5DB"; // fallback gray
+    return "#d6d3d1"; // fallback gray
   };
 
   return (
-    <View className="flex flex-col p-5 mx-4 my-6 shadow-xl border border-stone-300 rounded-xl bg-stone-100">
+    <View className="flex flex-col p-5 mx-4 my-6 shadow-xl rounded-xl bg-stone-100">
       <Text className="text-lg font-medium text-stone-950 mb-4">Your recent activity</Text>
       <View className="flex flex-row justify-between items-center">
         {past7Days.map((day, index) => (
           <View key={index} className="items-center">
             {day.percentage === 1 ? (
-              // <View
-              //   className="rounded-full flex justify-center items-center"
-              //   style={{
-              //     backgroundColor: calculateColor(day.percentage),
-              //     width: 32,
-              //     height: 32,
-              //   }}
-              // >
-              //   <Check size={20} weight="bold" color="white" />
-              // </View>
-            <AnimatedCircularProgress
-              size={32}
-              width={4}
-              fill={day.percentage * 100}
-              tintColor={calculateColor(day.percentage)}
-              backgroundColor="#d6d3d1"
-              rotation={0}
-            >
-              {
-                () => (
-                  <Check size={18} weight="bold" color="#22c55e" />
-                )
-              }
-            </AnimatedCircularProgress>
+              <View
+                className="rounded-full flex justify-center items-center"
+                style={{
+                  backgroundColor: calculateColor(day.percentage),
+                  width: 32,
+                  height: 32,
+                }}
+              >
+                <Check size={20} weight="bold" color="white" />
+              </View>
             ) : (
               <AnimatedCircularProgress
                 size={32}

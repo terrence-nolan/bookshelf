@@ -15,6 +15,15 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <House size={28} weight={focused ? 'fill' : 'regular'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="books"
         options={{
           title: 'Books',
@@ -38,15 +47,6 @@ export default function TabLayout() {
           title: 'Podcasts',
           tabBarIcon: ({ color, focused }) => (
             <Microphone size={28} weight={focused ? 'fill' : 'regular'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <House size={28} weight={focused ? 'fill' : 'regular'} color={color} />
           ),
         }}
       />

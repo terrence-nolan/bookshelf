@@ -24,23 +24,23 @@ export default function BookshelfHeader() {
 
   return (
     <>
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        onPress={() => setTimerModal(true)}
-      >
-        <Timer size={28} color={Colors[colorScheme ?? 'light'].text} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => setAddBookModal(true)}
-      >
-        <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
-      </TouchableOpacity>
-      <TimerModal isVisible={timerModal} setIsVisible={toggleTimerModal} />
-      <AddBookModal isVisible={addBookModal} setIsVisible={toggleAddBookModal} />
-    </View>
-    <View style={styles.headerContainer}>
-      <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Books</Text>
-    </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => setTimerModal(true)}
+        >
+          <Timer size={28} color={Colors[colorScheme ?? 'light'].text} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setAddBookModal(true)}
+        >
+          <Plus size={28} color={Colors[colorScheme ?? 'light'].text} />
+        </TouchableOpacity>
+        <TimerModal isVisible={timerModal} setIsVisible={toggleTimerModal} />
+        <AddBookModal isVisible={addBookModal} setIsVisible={toggleAddBookModal} />
+      </View>
+      <View style={styles.headerContainer}>
+        <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Books</Text>
+      </View>
     </>
   )
 }

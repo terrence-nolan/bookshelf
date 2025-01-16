@@ -43,7 +43,7 @@ export function AddBookModal({ isVisible, setIsVisible }: AddBookModalProps) {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <BlurView className='flex-1' tint={blurTint} intensity={75}>
             <SafeAreaView />
-            <ModalHeader setIsVisible={setIsVisible} headerText='Cancel' />
+            <ModalHeader setIsVisible={setIsVisible} closeButtonLabel='Cancel' />
             <ScrollView
               className="flex-1 p-5 pb-10"
               keyboardDismissMode='on-drag'

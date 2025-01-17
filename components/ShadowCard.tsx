@@ -7,7 +7,7 @@ interface ShadowCardProps {
 
 export function ShadowCard({ childComponent }: ShadowCardProps) {
   return (
-    <View className="flex flex-col p-5 m-4 shadow-xl rounded-xl bg-stone-100">
+    <View className="flex flex-col p-5 m-4 shadow-md rounded-xl bg-stone-100">
       {childComponent}
     </View>
   );

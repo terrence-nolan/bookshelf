@@ -56,7 +56,7 @@ export function ProgressBar() {
           <Text className="text-lg font-medium text-stone-950">Today's reading</Text>
           <Text className="text-lg font-medium text-stone-950">{((totalLoggedMinutes / dailyGoal) * 100).toFixed(0)}%</Text>
         </View>
-        <View className="bg-stone-300 h-1.5 w-full rounded-full">
+        <View className="bg-stone-300 h-1.5 w-full rounded-full my-1">
           <Animated.View style={[animatedWidth, animatedBackgroundColor]} className="h-1.5 rounded-full" />
         </View>
         <View className="flex-row items-center gap-1 justify-start">
@@ -66,8 +66,11 @@ export function ProgressBar() {
           <Text className="text-base text-stone-500">{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
         </View>
       </View>
-      <View className="items-center mt-6">
-        <TouchableOpacity className="bg-stone-950 py-4 px-6 rounded-full">
+      <View className="flex flex-row justify-around items-center mt-6">
+        <TouchableOpacity className="border-2 border-stone-950 py-2 px-6 rounded-full">
+          <Text className="text-stone-950 font-medium text-lg">Adjust Goal</Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="bg-stone-950 border-2 border-stone-950 py-2 px-6 rounded-full">
           <Text className="text-stone-50 font-medium text-lg">Continue Reading</Text>
         </TouchableOpacity>
       </View>

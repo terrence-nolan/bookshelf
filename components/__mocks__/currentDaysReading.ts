@@ -1,3 +1,3 @@
-export const totalLoggedSeconds = 1000;
+export const totalLoggedSeconds = 60;
 export const dailyGoal = 5;
-export const totalLoggedMinutes = 7;
+export const totalLoggedMinutes = 2;

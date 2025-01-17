@@ -7,3 +7,5 @@ export const recentDaysReading = [
   { day: "Sat", percentage: 1.0 },
   { day: "Sun", percentage: 1.0 },
 ];
+
+export const streakData = { isStreak: true, streakCount: 3 };

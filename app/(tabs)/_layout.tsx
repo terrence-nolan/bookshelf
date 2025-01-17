@@ -26,7 +26,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="books"
         options={{
-          title: 'Books',
+          title: 'Media',
           tabBarIcon: ({ color, focused }) => (
             <Books size={28} weight={focused ? 'fill' : 'regular'} color={color} />
           ),

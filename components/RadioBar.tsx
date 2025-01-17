@@ -22,13 +22,13 @@ export function RadioBar({ selectionOptions, defaultSelection, onSelect }: Radio
           key={option}
           onPress={() => handleSelect(option)}
           className={`px-3 py-1 rounded-full ${
-            selected === option ? "bg-stone-950" : "bg-stone-200"
+            selected === option ? "bg-stone-950" : "bg-stone-300"
           }`}
         >
           <Text
-            className={
+            className={`font-medium ${
               selected === option ? "text-stone-50" : "text-stone-950"
-            }
+            }`}
           >
             {option}
           </Text>

@@ -28,7 +28,7 @@ export function RecentActivity() {
 
   return (
     <>
-      <Text className="text-lg font-medium text-stone-950 mb-4">Your recent activity</Text>
+      <Text className="text-lg font-medium text-stone-950 mb-4">Recent activity</Text>
       <View className="flex flex-row justify-between items-center">
         {past7Days.map((day, index) => (
           <View key={index} className="items-center">

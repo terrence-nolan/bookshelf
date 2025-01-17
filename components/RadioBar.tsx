@@ -22,7 +22,7 @@ export function RadioBar({ selectionOptions, defaultSelection, onSelect }: Radio
           key={option}
           onPress={() => handleSelect(option)}
           className={`px-3 py-1 rounded-full ${
-            selected === option ? "bg-stone-950" : "bg-stone-300"
+            selected === option ? "bg-stone-950" : "bg-stone-200"
           }`}
         >
           <Text

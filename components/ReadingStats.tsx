@@ -44,7 +44,7 @@ export function ReadingStats() {
       </View>
 
       <View className="items-center mt-6">
-        <TouchableOpacity className="bg-stone-300 px-4 py-2 rounded-full">
+        <TouchableOpacity className="bg-stone-200 px-6 py-2 rounded-full">
           <Text className="text-stone-950 font-medium">View Full Stats</Text>
         </TouchableOpacity>
       </View>

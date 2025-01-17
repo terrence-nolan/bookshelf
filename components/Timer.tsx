@@ -77,7 +77,7 @@ export function Timer() {
           onPress={handleStartStop}
           className={`p-4 rounded-full bg-stone-950`}
         >
-          {isRunning ? <Pause size={28} color='white' /> : <Play size={28} color='white' />}
+          {isRunning ? <Pause size={28} color='white' weight="fill" /> : <Play size={28} color='white' weight="fill" />}
         </TouchableOpacity>
 
         <TouchableOpacity

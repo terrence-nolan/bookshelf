@@ -66,7 +66,7 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
               <Timer />
               <View className='absolute bottom-5 left-0 right-0 items-center'>
                 <TouchableOpacity
-                  className='bg-stone-950 py-4 px-6 rounded-full'
+                  className='bg-stone-950 py-2 px-6 rounded-full'
                   onPress={openBottomSheet}
                 >
                   <Text className='text-stone-50 font-medium text-lg'>Adjust Goal</Text>

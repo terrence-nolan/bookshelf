@@ -67,7 +67,7 @@ export function ProgressBar() {
         </View>
       </View>
       <View className="flex flex-row justify-around items-center mt-6">
-        <TouchableOpacity className="bg-stone-300 py-2 px-6 rounded-full">
+        <TouchableOpacity className="bg-stone-200 py-2 px-6 rounded-full">
           <Text className="text-stone-950 font-medium text-lg">Adjust Goal</Text>
         </TouchableOpacity>
         <TouchableOpacity className="bg-stone-950  py-2 px-6 rounded-full">

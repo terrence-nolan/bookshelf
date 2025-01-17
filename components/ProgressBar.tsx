@@ -59,12 +59,12 @@ export function ProgressBar() {
         <View className="bg-stone-300 h-1.5 w-full rounded-full">
           <Animated.View style={[animatedWidth, animatedBackgroundColor]} className="h-1.5 rounded-full" />
         </View>
-        {totalLoggedSeconds >= dailyGoal * 60 && (
-          <View className="flex-row items-center gap-1 justify-start">
+        <View className="flex-row items-center gap-1 justify-start">
+          {totalLoggedSeconds >= dailyGoal * 60 && (
             <CheckCircle size={16} weight="fill" color="#22c55e" />
-            <Text className="text-base text-stone-500">{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
-          </View>
-        )}
+          )}
+          <Text className="text-base text-stone-500">{Math.floor(totalLoggedMinutes)} of {dailyGoal} min read</Text>
+        </View>
       </View>
       <View className="items-center mt-6">
         <TouchableOpacity className="bg-stone-950 py-4 px-6 rounded-full">

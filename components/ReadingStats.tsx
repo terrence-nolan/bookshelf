@@ -10,5 +10,5 @@ export function ReadingStats() {
         <RadioBar selectionOptions={["W", "M", "Y"]} defaultSelection="W" />
       </View>
     </View>
-  )
+  );
 }

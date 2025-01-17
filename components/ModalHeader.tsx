@@ -13,5 +13,5 @@ export function ModalHeader({ setIsVisible, closeButtonLabel }: ModalHeaderProps
         <Text className="text-xl pl-5">{closeButtonLabel}</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }

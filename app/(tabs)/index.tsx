@@ -20,7 +20,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
       <ScrollView className="h-full flex-col">
-        <Text className="text-3xl text-stone-950 font-semibold px-4 py-2">Welcome Back, {name}!</Text>
+        <Text className="text-3xl text-stone-950 font-semibold px-4 py-2 mb-2">Welcome Back, {name}!</Text>
         <ShadowCard childComponent={<ProgressBar />} />
         <ShadowCard childComponent={<RecentGoalSuccess />} />
         <ShadowCard childComponent={<ReadingStats />} />

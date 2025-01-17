@@ -33,8 +33,8 @@ export function RecentGoalSuccess() {
         <Text className="text-lg font-medium text-stone-950">Recent goal success</Text>
         {readingStreakData.isStreak ? (
           <View className="flex flex-row items-center">
-            <Text className="text-lg font-medium text-green-500">{readingStreakData.streakCount}</Text>
-            <Fire size={16} color="#22c55e" weight="bold" />
+            <Text className="text-lg font-medium text-stone-950">{readingStreakData.streakCount}</Text>
+            <Fire size={16} color="#0c0a09" weight="bold" />
           </View>
         ) : (
           <></>

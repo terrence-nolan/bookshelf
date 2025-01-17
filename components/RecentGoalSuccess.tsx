@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Check } from "phosphor-react-native";
+import { Check, Fire } from "phosphor-react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
-import { recentDaysReading } from './__mocks__/recentDaysReading';
+import { recentDaysReading, streakData } from './__mocks__/recentDaysReading';
 
-export function RecentActivity() {
+export function RecentGoalSuccess() {
   const past7Days = recentDaysReading;
+  const readingStreakData = streakData;
 
   const calculateColor = (percentage: number) => {
     const thresholds = [0, 0.33, 0.66, 1];
@@ -28,7 +29,17 @@ export function RecentActivity() {
 
   return (
     <>
-      <Text className="text-lg font-medium text-stone-950 mb-4">Recent activity</Text>
+      <View className="flex flex-row justify-between items-center mb-4">
+        <Text className="text-lg font-medium text-stone-950">Recent goal success</Text>
+        {readingStreakData.isStreak ? (
+          <View className="flex flex-row items-center">
+            <Text className="text-lg font-medium text-green-500">{readingStreakData.streakCount}</Text>
+            <Fire size={16} color="#22c55e" weight="bold" />
+          </View>
+        ) : (
+          <></>
+        )}
+      </View>
       <View className="flex flex-row justify-between items-center">
         {past7Days.map((day, index) => (
           <View key={index} className="items-center">

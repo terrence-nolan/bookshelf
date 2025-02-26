@@ -16,13 +16,6 @@ interface TimerProps {
   setIsVisible: () => void;
 }
 
-// interface TimerLog {
-//   id: string;
-//   startTime: string;
-//   endTime?: string;
-//   duration: number;
-// }
-
 export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
@@ -42,39 +35,38 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
     }
   };
 
-
   useEffect(() => {
     const loadTimerState = async () => {
-      const storedTime = await AsyncStorage.getItem('elapsedTime');
+      const storedStartTime = await AsyncStorage.getItem('startTime');
       const storedRunning = await AsyncStorage.getItem('isRunning');
 
-      if (storedTime !== null) setElapsedTime(Number(storedTime));
+      if (storedStartTime) {
+        const savedStartTime = new Date(JSON.parse(storedStartTime));
+        const timeDiff = Math.floor((new Date().getTime() - savedStartTime.getTime()) / 1000);
+        setElapsedTime(timeDiff);
+        setStartTime(savedStartTime);
+      }
+
       if (storedRunning !== null) setIsRunning(JSON.parse(storedRunning));
     };
 
-    loadTimerState();
-  }, []);
+    if (isVisible) {
+      loadTimerState();
+    }
+  }, [isVisible]);
 
-  useEffect(() => {
-    const saveTimerState = async () => {
-      await AsyncStorage.setItem('elapsedTime', elapsedTime.toString());
-      await AsyncStorage.setItem('isRunning', JSON.stringify(isRunning));
-    };
-
-    saveTimerState();
-  }, [elapsedTime, isRunning]);
-
-  // const formatGoal = (minutes: number) => {
-  //   const hrs = Math.floor(minutes / 60);
-  //   const mins = minutes % 60;
-
-  //   if (hrs > 0 && mins !== 0) {
-  //     return `${hrs} hour and${mins > 0 ? ` ${mins} minute` : ''}`;
-  //   } else if (hrs > 0 && mins == 0) {
-  //     return `${hrs} hour`;
-  //   }
-  //   return `${mins} minute`;
-  // };
+  const handleStartStop = async () => {
+    if (isRunning) {
+      setIsRunning(false);
+      await AsyncStorage.setItem('isRunning', JSON.stringify(false));
+    } else {
+      const newStartTime = new Date();
+      setStartTime(newStartTime);
+      setIsRunning(true);
+      await AsyncStorage.setItem('isRunning', JSON.stringify(true));
+      await AsyncStorage.setItem('startTime', JSON.stringify(newStartTime));
+    }
+  };
 
   return (
     <Modal
@@ -90,7 +82,14 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
             <ModalHeader setIsVisible={setIsVisible} closeButtonLabel='Close' />
 
             <View className="flex-1 flex-col justify-center items-center px-5">
-              <Timer isRunning={isRunning} setIsRunning={setIsRunning} elapsedTime={elapsedTime} setElapsedTime={setElapsedTime} startTime={startTime} setStartTime={setStartTime} />
+              <Timer
+                isRunning={isRunning}
+                setIsRunning={setIsRunning}
+                elapsedTime={elapsedTime}
+                setElapsedTime={setElapsedTime}
+                setStartTime={setStartTime}
+                handleStartStop={handleStartStop}
+              />
               <View className='absolute bottom-5 left-0 right-0 items-center'>
                 <TouchableOpacity
                   className='bg-stone-950 py-2 px-6 rounded-full'
@@ -118,14 +117,7 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
               <Text className="text-xl font-medium">Set Daily Goal</Text>
               <Picker
                 selectedValue={dailyGoal.toString()}
-                onValueChange={(value) => {
-                  setDailyGoal(Number(value));
-                  // setProgressBarWidth(() => {
-                  //   const progress = Math.min(totalLoggedTime, Number(value) * 60);
-                  //   console.log('>>>>>>> progress:', progress);
-                  //   return Math.max((progress / (Number(value) * 60)) * 100, 7);
-                  // });
-                }}
+                onValueChange={(value) => setDailyGoal(Number(value))}
                 style={{ height: 50, width: '100%' }}
               >
                 {pickerOptions.map((value) => (

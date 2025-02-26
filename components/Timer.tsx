@@ -6,9 +6,9 @@ interface TimerProps {
   isRunning: boolean;
   setIsRunning: (state: boolean) => void;
   elapsedTime: number;
-  setElapsedTime: (time: number) => void;
-  startTime: Date | null;
+  setElapsedTime: (time: number | ((prev: number) => number)) => void;
   setStartTime: (time: Date | null) => void;
+  handleStartStop: () => void;
 }
 
 export function Timer({
@@ -16,12 +16,9 @@ export function Timer({
   setIsRunning,
   elapsedTime,
   setElapsedTime,
-  startTime,
   setStartTime,
+  handleStartStop,
 }: TimerProps) {
-  // const [isRunning, setIsRunning] = useState<boolean>(false);
-  // const [elapsedTime, setElapsedTime] = useState<number>(0);
-  // const [startTime, setStartTime] = useState<Date | null>(null);
   const [totalLoggedSeconds, setTotalLoggedSeconds] = useState<number>(0);
   const [totalLoggedMinutes, setTotalLoggedMinutes] = useState<number>(0);
 
@@ -54,15 +51,6 @@ export function Timer({
       return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     } else {
       return `${mins.toString().padStart(1, '0')}:${secs.toString().padStart(2, '0')}`
-    }
-  };
-
-  const handleStartStop = () => {
-    if (isRunning) {
-      setIsRunning(false);
-    } else {
-      setStartTime(new Date());
-      setIsRunning(true);
     }
   };
 

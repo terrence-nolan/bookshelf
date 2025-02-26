@@ -2,10 +2,26 @@ import React, { ArrowCounterClockwise, Check, Pause, Play } from "phosphor-react
 import { useEffect, useRef, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-export function Timer() {
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
-  const [startTime, setStartTime] = useState<Date | null>(null);
+interface TimerProps {
+  isRunning: boolean;
+  setIsRunning: (state: boolean) => void;
+  elapsedTime: number;
+  setElapsedTime: (time: number) => void;
+  startTime: Date | null;
+  setStartTime: (time: Date | null) => void;
+}
+
+export function Timer({
+  isRunning,
+  setIsRunning,
+  elapsedTime,
+  setElapsedTime,
+  startTime,
+  setStartTime,
+}: TimerProps) {
+  // const [isRunning, setIsRunning] = useState<boolean>(false);
+  // const [elapsedTime, setElapsedTime] = useState<number>(0);
+  // const [startTime, setStartTime] = useState<Date | null>(null);
   const [totalLoggedSeconds, setTotalLoggedSeconds] = useState<number>(0);
   const [totalLoggedMinutes, setTotalLoggedMinutes] = useState<number>(0);
 
@@ -14,7 +30,7 @@ export function Timer() {
   useEffect(() => {
     if (isRunning) {
       timerRef.current = setInterval(() => {
-        setElapsedTime((prev) => prev + 1);
+        setElapsedTime((prev: number) => prev + 1);
       }, 1000);
     } else if (timerRef.current) {
       clearInterval(timerRef.current);

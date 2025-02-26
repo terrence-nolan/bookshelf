@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { Picker } from '@react-native-picker/picker';
 import BottomSheet, { BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { pickerOptions } from '@/constants/pickerOptions';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -23,6 +24,10 @@ interface TimerProps {
 // }
 
 export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [startTime, setStartTime] = useState<Date | null>(null);
+
   const { top, bottom } = useSafeAreaInsets();
   const colorScheme = useColorScheme();
   const blurTint = colorScheme === 'dark' ? 'systemThickMaterialDark' : 'systemThickMaterialLight';
@@ -36,6 +41,28 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
       bottomSheetRef.current.expand();
     }
   };
+
+
+  useEffect(() => {
+    const loadTimerState = async () => {
+      const storedTime = await AsyncStorage.getItem('elapsedTime');
+      const storedRunning = await AsyncStorage.getItem('isRunning');
+
+      if (storedTime !== null) setElapsedTime(Number(storedTime));
+      if (storedRunning !== null) setIsRunning(JSON.parse(storedRunning));
+    };
+
+    loadTimerState();
+  }, []);
+
+  useEffect(() => {
+    const saveTimerState = async () => {
+      await AsyncStorage.setItem('elapsedTime', elapsedTime.toString());
+      await AsyncStorage.setItem('isRunning', JSON.stringify(isRunning));
+    };
+
+    saveTimerState();
+  }, [elapsedTime, isRunning]);
 
   // const formatGoal = (minutes: number) => {
   //   const hrs = Math.floor(minutes / 60);
@@ -63,7 +90,7 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
             <ModalHeader setIsVisible={setIsVisible} closeButtonLabel='Close' />
 
             <View className="flex-1 flex-col justify-center items-center px-5">
-              <Timer />
+              <Timer isRunning={isRunning} setIsRunning={setIsRunning} elapsedTime={elapsedTime} setElapsedTime={setElapsedTime} startTime={startTime} setStartTime={setStartTime} />
               <View className='absolute bottom-5 left-0 right-0 items-center'>
                 <TouchableOpacity
                   className='bg-stone-950 py-2 px-6 rounded-full'

@@ -5,7 +5,7 @@ import { RadioBar } from "./RadioBar";
 import { readingStats } from "./__mocks__/readingStats";
 
 export function ReadingStats() {
-  const [selectedRange, setSelectedRange] = useState("W");
+  const [selectedRange, setSelectedRange] = useState("Wk");
 
   const handleSelection = (selection: string) => {
     if (selection in readingStats) {
@@ -21,8 +21,8 @@ export function ReadingStats() {
         <View className="flex w-full flex-row justify-between items-center">
           <Text className="text-lg font-medium text-stone-950">Reading stats</Text>
           <RadioBar
-            selectionOptions={["W", "M", "Y", "A"]}
-            defaultSelection="W"
+            selectionOptions={["Wk", "Mo", "Yr", "All"]}
+            defaultSelection="Wk"
             onSelect={handleSelection}
           />
         </View>

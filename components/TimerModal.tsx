@@ -37,36 +37,67 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
 
   useEffect(() => {
     const loadTimerState = async () => {
-      const storedStartTime = await AsyncStorage.getItem('startTime');
-      const storedRunning = await AsyncStorage.getItem('isRunning');
-
-      if (storedStartTime) {
-        const savedStartTime = new Date(JSON.parse(storedStartTime));
-        const timeDiff = Math.floor((new Date().getTime() - savedStartTime.getTime()) / 1000);
-        setElapsedTime(timeDiff);
-        setStartTime(savedStartTime);
+      const storedStartTime = await AsyncStorage.getItem("startTime");
+      const storedRunning = await AsyncStorage.getItem("isRunning");
+      const storedElapsedTime = await AsyncStorage.getItem("elapsedTime");
+  
+      let totalElapsedTime = 0;
+  
+      if (storedElapsedTime) {
+        totalElapsedTime = Number(storedElapsedTime);
       }
-
-      if (storedRunning !== null) setIsRunning(JSON.parse(storedRunning));
+  
+      if (storedRunning !== null) {
+        const running = JSON.parse(storedRunning);
+        setIsRunning(running);
+  
+        if (running && storedStartTime) {
+          // Timer was running before, so we must calculate the additional elapsed time
+          const savedStartTime = new Date(JSON.parse(storedStartTime));
+          const timeDiff = Math.floor((new Date().getTime() - savedStartTime.getTime()) / 1000);
+          setElapsedTime(totalElapsedTime + timeDiff); // Accumulate previous elapsed time
+          setStartTime(savedStartTime);
+        } else {
+          // Timer was paused before, just restore elapsed time
+          setElapsedTime(totalElapsedTime);
+        }
+      }
     };
-
+  
     if (isVisible) {
       loadTimerState();
     }
   }, [isVisible]);
+  
+  
 
   const handleStartStop = async () => {
     if (isRunning) {
+      // PAUSE the timer
       setIsRunning(false);
-      await AsyncStorage.setItem('isRunning', JSON.stringify(false));
+      await AsyncStorage.setItem("isRunning", JSON.stringify(false));
+      await AsyncStorage.setItem("elapsedTime", JSON.stringify(elapsedTime)); // Store elapsed time
     } else {
-      const newStartTime = new Date();
+      // RESUME the timer
+      const storedStartTime = await AsyncStorage.getItem("startTime");
+      
+      let newStartTime;
+      if (storedStartTime) {
+        // If there's a stored start time, reuse it
+        newStartTime = new Date(JSON.parse(storedStartTime));
+      } else {
+        // Otherwise, set a new start time
+        newStartTime = new Date();
+        await AsyncStorage.setItem("startTime", JSON.stringify(newStartTime));
+      }
+  
       setStartTime(newStartTime);
       setIsRunning(true);
-      await AsyncStorage.setItem('isRunning', JSON.stringify(true));
-      await AsyncStorage.setItem('startTime', JSON.stringify(newStartTime));
+      await AsyncStorage.setItem("isRunning", JSON.stringify(true));
     }
   };
+  
+  
 
   return (
     <Modal

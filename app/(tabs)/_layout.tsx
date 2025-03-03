@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { House, Books, Headphones, Microphone, Timer } from 'phosphor-react-native';
+import { House, Books, Headphones, Microphone, Record } from 'phosphor-react-native';
 
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -29,6 +29,15 @@ export default function TabLayout() {
           title: 'Media',
           tabBarIcon: ({ color, focused }) => (
             <Books size={28} weight={focused ? 'fill' : 'regular'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="record"
+        options={{
+          title: 'Record',
+          tabBarIcon: ({ color, focused }) => (
+            <Record size={28} weight={focused ? 'fill' : 'regular'} color={color} />
           ),
         }}
       />

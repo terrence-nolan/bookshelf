@@ -38,7 +38,8 @@
         {
           "photosPermission": "Allow Bookshelf to access your photos"
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

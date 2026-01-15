@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { ArrowCounterClockwise, Check, Pause, Play } from "phosphor-react-native";
 import { useEffect, useRef, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
@@ -27,17 +28,17 @@ export function Timer({
   useEffect(() => {
     if (isRunning) {
       timerRef.current = setInterval(() => {
-        setElapsedTime((prev: number) => prev + 1);
+        setElapsedTime((prev) => prev + 1);
       }, 1000);
     } else if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-
+  
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isRunning]);
+  }, [isRunning]);  
 
   const formatTime = (seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
@@ -63,13 +64,18 @@ export function Timer({
     }
   };
 
-  const handleClear = () => {
+  const handleClear = async () => {
     if (elapsedTime > 0) {
       setIsRunning(false);
       setElapsedTime(0);
       setStartTime(null);
+  
+      await AsyncStorage.removeItem("startTime"); // Clear stored start time
+      await AsyncStorage.setItem("isRunning", JSON.stringify(false));
+      await AsyncStorage.setItem("elapsedTime", JSON.stringify(0));
     }
-  };
+  };  
+  
 
   return (
     <View className='items-center'>

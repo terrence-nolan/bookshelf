@@ -13,7 +13,6 @@ export default function BookshelfHeader() {
   const [addBookModal, setAddBookModal] = useState<boolean>(false);
   const [timerModal, setTimerModal] = useState<boolean>(false);
 
-
   const toggleAddBookModal = () => {
     setAddBookModal(!addBookModal)
   }
@@ -42,7 +41,7 @@ export default function BookshelfHeader() {
         <Text style={[styles.header, { color: Colors[colorScheme ?? 'light'].text }]}>My Books</Text>
       </View>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

@@ -10,6 +10,7 @@ import { pickerOptions } from '@/constants/pickerOptions';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ModalHeader } from './ModalHeader';
 import { Timer } from './Timer';
+import AdjustGoalBottomsheet from './AdjustGoalBottomsheet';
 
 interface TimerProps {
   isVisible: boolean;
@@ -68,6 +69,8 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
     }
   };
 
+  // Also now that I have the modal in 2 separate places, it's broken. It doesn't animate counting and if I stop it one place, it doesn't stop in both
+
   return (
     <Modal
       visible={isVisible}
@@ -101,7 +104,10 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
             </View>
           </View>
 
-          <BottomSheet
+          {/* TODO: fix this component */}
+          {true && <AdjustGoalBottomsheet openBottomSheet={openBottomSheet} />}
+
+          {/* <BottomSheet
             ref={bottomSheetRef}
             index={-1}
             snapPoints={['33%']}
@@ -129,7 +135,7 @@ export function TimerModal({ isVisible, setIsVisible }: TimerProps) {
                 ))}
               </Picker>
             </BottomSheetView>
-          </BottomSheet>
+          </BottomSheet> */}
         </View>
       </BlurView>
     </Modal>

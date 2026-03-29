@@ -1,13 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { CheckCircle } from "phosphor-react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 import { totalLoggedSeconds, dailyGoal, totalLoggedMinutes } from "./__mocks__/currentDaysReading";
+import { TimerModal } from "./TimerModal";
 
 export function ProgressBar() {
   const animatedProgress = useSharedValue(0);
   const animatedThreshold = useSharedValue(0);
+  const [timerModal, setTimerModal] = useState<boolean>(false);
+
+  const toggleTimerModal = () => {
+    setTimerModal(!timerModal)
+  }
 
   const calculateThreshold = (progressRatio: number) => {
     const thresholds = [0, 0.33, 0.66, 1];
@@ -70,10 +76,14 @@ export function ProgressBar() {
         <TouchableOpacity className="bg-stone-200 py-2 px-6 rounded-full">
           <Text className="text-stone-950 font-medium text-lg">Adjust Goal</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="bg-stone-950  py-2 px-6 rounded-full">
+        <TouchableOpacity
+          className="bg-stone-950  py-2 px-6 rounded-full"
+          onPress={toggleTimerModal}
+        >
           <Text className="text-stone-50 font-medium text-lg">Continue Reading</Text>
         </TouchableOpacity>
       </View>
+      <TimerModal isVisible={timerModal} setIsVisible={toggleTimerModal} />
     </>
   );
 }
